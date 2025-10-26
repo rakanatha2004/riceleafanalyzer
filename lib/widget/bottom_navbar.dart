@@ -173,7 +173,7 @@ class CenterScanButton extends StatelessWidget {
     super.key,
     required this.onTap,
     this.asset = 'assets/icon/scan.png',
-    this.size = 72,
+    this.size = 76,
     this.showShadow = true,
   });
 

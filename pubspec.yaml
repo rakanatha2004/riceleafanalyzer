@@ -63,6 +63,8 @@ flutter:
     - assets/icon3.png
     - assets/Icon5.png
     - assets/piechart.png
+    - assets/sawit.png
+    - assets/lampu.png
     - assets/icon/edukasi.png
     - assets/icon/edukasi-aktif.png
     - assets/icon/hasil.png
@@ -79,7 +81,7 @@ flutter:
     - assets/icon/iconinformasi.png
     - assets/icon/icondeteksi.png
     - assets/icon/deteksiai.png
-  
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

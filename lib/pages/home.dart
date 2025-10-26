@@ -52,8 +52,8 @@ class _HomePageState extends State<HomePage> {
       String assetPath,
       String title,
       String subtitle, {
-      double titleSize = 16,
-      double subtitleSize = 12,
+      double titleSize = 12.5,
+      double subtitleSize = 11,
       bool showBadge = false,
     }) {
       return Container(
@@ -69,59 +69,63 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // icon area: either a circular badge with image or the plain image (no border)
-            if (showBadge)
-              Container(
-                width: 56,
-                height: 56,
-                decoration: const BoxDecoration(
-                  color: Color(0x1F00A991),
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: SizedBox(
-                    width: 28,
-                    height: 28,
-                    child: Image.asset(assetPath, fit: BoxFit.contain),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // icon area: either a circular badge with image or the plain image (no border)
+                if (showBadge)
+                  Container(
+                    width: 56,
+                    height: 56,
+                    decoration: const BoxDecoration(
+                      color: Color(0x1F00A991),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: SizedBox(
+                        width: 28,
+                        height: 28,
+                        child: Image.asset(assetPath, fit: BoxFit.contain),
+                      ),
+                    ),
+                  )
+                else
+                  SizedBox(
+                    width: 56,
+                    height: 56,
+                    child: Center(
+                      child: SizedBox(
+                        width: 36,
+                        height: 36,
+                        child: Image.asset(assetPath, fit: BoxFit.contain),
+                      ),
+                    ),
                   ),
-                ),
-              )
-            else
-              SizedBox(
-                width: 56,
-                height: 56,
-                child: Center(
-                  child: SizedBox(
-                    width: 36,
-                    height: 36,
-                    child: Image.asset(assetPath, fit: BoxFit.contain),
-                  ),
-                ),
-              ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
+                const SizedBox(width: 6),
+                Flexible(
+                  child: Text(
                     title,
                     style: GoogleFonts.poppins(
                       fontSize: titleSize,
                       fontWeight: FontWeight.w700,
                     ),
+                    // keep title unindented and allow wrapping if needed
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    subtitle,
-                    style: GoogleFonts.poppins(
-                      fontSize: subtitleSize,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            // subtitle below both icon and title
+            Text(
+              subtitle,
+              style: GoogleFonts.poppins(
+                fontSize: subtitleSize,
+                color: Colors.black54,
               ),
             ),
           ],
@@ -219,35 +223,35 @@ class _HomePageState extends State<HomePage> {
               crossAxisCount: 2,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
-              childAspectRatio: 1,
+              childAspectRatio: 1.1,
               children: [
                 featureCard(
                   'assets/icon/icondeteksi.png',
                   'Deteksi AI',
                   'Foto daun padi untuk identifikasi cepat.',
-                  titleSize: 14,
-                  subtitleSize: 10,
+                  // titleSize: 12,
+                  // subtitleSize: 10,
                 ),
                 featureCard(
                   'assets/icon/iconedukasi.png',
                   'Edukasi',
                   'Pelajari kondisi daun padi yang terkena penyakit.',
-                  titleSize: 14,
-                  subtitleSize: 10,
+                  // titleSize: 12,
+                  // subtitleSize: 10,
                 ),
                 featureCard(
                   'assets/icon/iconhasil.png',
                   'Hasil',
                   'Lihat diagnosa daun padi Anda secara instan.',
-                  titleSize: 14,
-                  subtitleSize: 10,
+                  // titleSize: 12,
+                  // subtitleSize: 10,
                 ),
                 featureCard(
                   'assets/icon/iconinformasi.png',
                   'Informasi',
                   'Bersihkan informasi penggunaan aplikasi.',
-                  titleSize: 14,
-                  subtitleSize: 10,
+                  // titleSize: 12,
+                  // subtitleSize: 10,
                 ),
               ],
             ),
@@ -320,31 +324,133 @@ class _HomePageState extends State<HomePage> {
                                 shape: BoxShape.circle,
                                 color: const Color(0x2600A991),
                               ),
-                              // child: const Center(
-                              //   child: Icon(
-                              //     Icons.pie_chart,
-                              //     color: Colors.white,
-                              //   ),
-                              // ),
                             ),
                           ),
                         ),
-                        // Column(
-                        //   mainAxisSize: MainAxisSize.min,
-                        //   children: [
-                        //     Text(
-                        //       '95%',
-                        //       style: GoogleFonts.poppins(
-                        //         fontSize: 16,
-                        //         fontWeight: FontWeight.bold,
-                        //       ),
-                        //     ),
-                        //     Text(
-                        //       'Akurasi',
-                        //       style: GoogleFonts.poppins(fontSize: 12),
-                        //     ),
-                        //   ],
-                        // ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // Analisi Faktor Risiko Komprehensif
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(color: const Color(0x08000000), blurRadius: 8),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Analisi Faktor Risiko Komprehensif',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Kami menganalisis 4 jenis penyakit pada daun padi yang terbukti secara ilmiah.',
+                          style: GoogleFonts.poppins(fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Replace circular progress with piechart image asset
+                        SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Image.asset(
+                            'assets/sawit.png',
+                            fit: BoxFit.contain,
+                            errorBuilder: (ctx, err, st) => Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: const Color(0x2600A991),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            // Saran Pencegahan & Penanganan
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(color: const Color(0x08000000), blurRadius: 8),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Saran Pencegahan & Penanganan',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Memberikan rekomendasi tindakan yang tepat untuk mencegah penyakit dan menjaga kesehatan tanaman padi Anda.',
+                          style: GoogleFonts.poppins(fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Replace circular progress with piechart image asset
+                        SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Image.asset(
+                            'assets/lampu.png',
+                            fit: BoxFit.contain,
+                            errorBuilder: (ctx, err, st) => Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: const Color(0x2600A991),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
