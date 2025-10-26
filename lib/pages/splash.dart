@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../widget/bottom_navbar.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'home.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
-  _SplashPageState createState() => _SplashPageState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
@@ -15,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
 
     // Precache the logo after the first frame to avoid jank on first paint
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      precacheImage(const AssetImage('assets/icon/logo.png'), context);
+      precacheImage(const AssetImage('assets/logo.png'), context);
     });
 
     // Delay before navigating to the main screen. Check `mounted` to
@@ -24,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => BottomNavBar()),
+        MaterialPageRoute(builder: (_) => const HomePage()),
       );
     });
   }
@@ -43,28 +44,17 @@ class _SplashPageState extends State<SplashPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    'assets/icon/logo.png',
-                    width: 180,
-                    height: 180,
+                    'assets/logo.png',
+                    width: 287,
+                    height: 285,
                     fit: BoxFit.contain,
-                    semanticLabel: 'Rice Leaf Analyzer logo',
                     errorBuilder: (context, error, stackTrace) => const Icon(
                       Icons.broken_image,
                       size: 72,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'RiceLeafAnalyzer',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
+                  const SizedBox(height: 140),
                 ],
               ),
             ),
@@ -76,15 +66,24 @@ class _SplashPageState extends State<SplashPage> {
                 padding: const EdgeInsets.only(bottom: 24.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Text(
                       'Deteksi Penyakit Daun',
-                      style: TextStyle(color: Colors.white70, fontSize: 12),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        color: const Color(0xffE7EFF0),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                    SizedBox(height: 4),
                     Text(
                       'Padi Dengan Mudah',
-                      style: TextStyle(color: Colors.white70, fontSize: 12),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        color: const Color(0xffE7EFF0),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),
