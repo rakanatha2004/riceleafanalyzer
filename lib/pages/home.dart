@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Simple placeholder pages for each tab
     final pages = [
       _buildHome(context),
       const Center(child: Text('Edukasi')),
@@ -28,10 +27,6 @@ class _HomePageState extends State<HomePage> {
     ];
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Rice Leaf Analyzer'),
-      //   backgroundColor: const Color(0xFF00A991),
-      // ),
       body: pages[_currentIndex],
       floatingActionButton: CenterScanButton(onTap: () => _onTap(2)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -45,9 +40,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildHome(BuildContext context) {
     final teal = const Color(0xFF00A991);
 
-    // feature card that uses an asset icon.
-    // titleSize/subtitleSize can be passed to change font sizes.
-    // showBadge controls whether the circular teal background is shown around the icon.
+    
     Widget featureCard(
       String assetPath,
       String title,
@@ -75,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // icon area: either a circular badge with image or the plain image (no border)
+
                 if (showBadge)
                   Container(
                     width: 56,
@@ -112,7 +105,6 @@ class _HomePageState extends State<HomePage> {
                       fontSize: titleSize,
                       fontWeight: FontWeight.w700,
                     ),
-                    // keep title unindented and allow wrapping if needed
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -120,7 +112,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const SizedBox(height: 8),
-            // subtitle below both icon and title
+
             Text(
               subtitle,
               style: GoogleFonts.poppins(
@@ -172,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  // Illustration placeholder (no border/background)
+
                   SizedBox(
                     width: 86,
                     height: 86,
@@ -216,7 +208,7 @@ class _HomePageState extends State<HomePage> {
 
             const SizedBox(height: 12),
 
-            // Features grid 2x2
+
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -229,29 +221,21 @@ class _HomePageState extends State<HomePage> {
                   'assets/icon/icondeteksi.png',
                   'Deteksi AI',
                   'Foto daun padi untuk identifikasi cepat.',
-                  // titleSize: 12,
-                  // subtitleSize: 10,
                 ),
                 featureCard(
                   'assets/icon/iconedukasi.png',
                   'Edukasi',
                   'Pelajari kondisi daun padi yang terkena penyakit.',
-                  // titleSize: 12,
-                  // subtitleSize: 10,
                 ),
                 featureCard(
                   'assets/icon/iconhasil.png',
                   'Hasil',
                   'Lihat diagnosa daun padi Anda secara instan.',
-                  // titleSize: 12,
-                  // subtitleSize: 10,
                 ),
                 featureCard(
                   'assets/icon/iconinformasi.png',
                   'Informasi',
                   'Bersihkan informasi penggunaan aplikasi.',
-                  // titleSize: 12,
-                  // subtitleSize: 10,
                 ),
               ],
             ),
@@ -312,7 +296,7 @@ class _HomePageState extends State<HomePage> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        // Replace circular progress with piechart image asset
+
                         SizedBox(
                           width: 100,
                           height: 100,
@@ -374,7 +358,6 @@ class _HomePageState extends State<HomePage> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        // Replace circular progress with piechart image asset
                         SizedBox(
                           width: 100,
                           height: 100,
@@ -436,7 +419,6 @@ class _HomePageState extends State<HomePage> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        // Replace circular progress with piechart image asset
                         SizedBox(
                           width: 100,
                           height: 100,
