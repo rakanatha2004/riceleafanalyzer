@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'eduview.dart';
 
 class EdukasiPage extends StatefulWidget {
-  const EdukasiPage({Key? key}) : super(key: key);
+  const EdukasiPage({super.key});
 
   @override
   State<EdukasiPage> createState() => _EdukasiPageState();
@@ -81,20 +82,10 @@ class _EdukasiPageState extends State<EdukasiPage> {
                       scientific: it.scientific,
                       image: it.image,
                       onPressed: () {
-                        // placeholder: show details
-                        showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            title: Text(
-                              it.title,
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            content: Text(
-                              it.description,
-                              style: GoogleFonts.poppins(),
-                            ),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => EduViewPage(initialPage: i),
                           ),
                         );
                       },
@@ -158,8 +149,9 @@ class _InfoCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Top row: circular image and title (title aligned next to icon)
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // circular image from assets
                 Container(
@@ -169,7 +161,7 @@ class _InfoCard extends StatelessWidget {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.06),
+                        color: Colors.black.withAlpha((0.06 * 255).round()),
                         blurRadius: 6,
                         offset: const Offset(0, 2),
                       ),
@@ -190,33 +182,36 @@ class _InfoCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        description,
-                        style: GoogleFonts.poppins(
-                          fontSize: 13,
-                          height: 1.25,
-                          color: Colors.grey.shade700,
-                        ),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                  child: Text(
+                    title,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
             ),
+
+            const SizedBox(height: 8),
+
+            // subtitle (description) below the icon+title row
+            Text(
+              description,
+              style: GoogleFonts.poppins(
+                fontSize: 13,
+                height: 1.25,
+                color: Colors.grey.shade700,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+
             const Spacer(),
+
+            // bottom row: scientific name and arrow button (unchanged)
             Row(
               children: [
                 Expanded(
@@ -238,7 +233,7 @@ class _InfoCard extends StatelessWidget {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
+                          color: Colors.black.withAlpha((0.08 * 255).round()),
                           blurRadius: 6,
                           offset: const Offset(0, 3),
                         ),

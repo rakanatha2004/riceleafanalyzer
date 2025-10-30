@@ -61,10 +61,15 @@ flutter:
     - assets/Icon1.png
     - assets/icon2.png
     - assets/icon3.png
+    - assets/icon4.png
     - assets/Icon5.png
     - assets/piechart.png
     - assets/sawit.png
     - assets/lampu.png
+    - assets/bakterial.png
+    - assets/blast.png
+    - assets/brownspot.png
+    - assets/leafsmut.png
     - assets/icon/edukasi.png
     - assets/icon/edukasi-aktif.png
     - assets/icon/hasil.png
@@ -81,7 +86,10 @@ flutter:
     - assets/icon/iconinformasi.png
     - assets/icon/icondeteksi.png
     - assets/icon/deteksiai.png
-    - assets/images/
+    - assets/images/bakterial.png
+    - assets/images/blast.png
+    - assets/images/brownspot.png
+    - assets/images/leafsmut.png
   
   # To add assets to your application, add an assets section, like this:
   # assets:
