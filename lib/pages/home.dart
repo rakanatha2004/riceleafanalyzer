@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widget/bottom_navbar.dart';
+import 'edukasi.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     // Simple placeholder pages for each tab
     final pages = [
       _buildHome(context),
-      const Center(child: Text('Edukasi')),
+      const EdukasiPage(),
       const Center(child: Text('Scan')),
       const Center(child: Text('Hasil')),
       const Center(child: Text('Informasi')),
