@@ -14,13 +14,10 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
 
-    // Precache the logo after the first frame to avoid jank on first paint
     WidgetsBinding.instance.addPostFrameCallback((_) {
       precacheImage(const AssetImage('assets/logo.png'), context);
     });
 
-    // Delay before navigating to the main screen. Check `mounted` to
-    // avoid calling Navigator if the widget was disposed.
     Future.delayed(const Duration(seconds: 4), () {
       if (!mounted) return;
       Navigator.pushReplacement(
@@ -37,7 +34,6 @@ class _SplashPageState extends State<SplashPage> {
       body: SafeArea(
         child: Stack(
           children: [
-            // Center content (logo + app name)
             Align(
               alignment: Alignment.center,
               child: Column(
@@ -59,7 +55,6 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
 
-            // Tagline at the bottom
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
