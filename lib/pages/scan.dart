@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'analisis.dart';
 
 /// ScanPage
 /// - shows live camera preview (if available)
@@ -109,28 +110,11 @@ class _ScanPageState extends State<ScanPage> {
     // simulate detection delay
     await Future.delayed(const Duration(seconds: 1));
     setState(() => _processing = false);
-
-    // show popup notification-like
+    // navigate to analysis/detail page with the picked image
     if (!mounted) return;
-    showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(
-          'Deteksi Selesai',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w700),
-        ),
-        content: Text(
-          'Gambar berhasil dideteksi.',
-          style: GoogleFonts.poppins(),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: Text('OK', style: GoogleFonts.poppins()),
-          ),
-        ],
-      ),
-    );
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_) => AnalisisPage(imagePath: _pickedImage!.path, label: 'Blast', accuracy: 1.0),
+    ));
   }
 
   Widget _buildTopBar() {
