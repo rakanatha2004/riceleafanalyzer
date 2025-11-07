@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widget/bottom_navbar.dart';
 import 'edukasi.dart';
+import 'scan.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,7 +30,11 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: pages[_currentIndex],
-      floatingActionButton: CenterScanButton(onTap: () => _onTap(2)),
+      floatingActionButton: CenterScanButton(
+        onTap: () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => const ScanPage())),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,
@@ -41,7 +46,6 @@ class _HomePageState extends State<HomePage> {
   Widget _buildHome(BuildContext context) {
     final teal = const Color(0xFF00A991);
 
-    
     Widget featureCard(
       String assetPath,
       String title,
@@ -69,7 +73,6 @@ class _HomePageState extends State<HomePage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 if (showBadge)
                   Container(
                     width: 56,
@@ -209,7 +212,6 @@ class _HomePageState extends State<HomePage> {
 
             const SizedBox(height: 12),
 
-
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -297,7 +299,6 @@ class _HomePageState extends State<HomePage> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-
                         SizedBox(
                           width: 100,
                           height: 100,
