@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widget/bottom_navbar.dart';
 import 'edukasi.dart';
 import 'scan.dart';
+import 'hasil.dart';
+import 'informasi.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,8 +26,9 @@ class _HomePageState extends State<HomePage> {
       _buildHome(context),
       const EdukasiPage(),
       const Center(child: Text('Scan')),
-      const Center(child: Text('Hasil')),
-      const Center(child: Text('Informasi')),
+      // show the HasilPage when the Hasil tab is selected
+      const HasilPage(),
+      const InformasiPage(),
     ];
 
     return Scaffold(
