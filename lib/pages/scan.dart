@@ -112,9 +112,15 @@ class _ScanPageState extends State<ScanPage> {
     setState(() => _processing = false);
     // navigate to analysis/detail page with the picked image
     if (!mounted) return;
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (_) => AnalisisPage(imagePath: _pickedImage!.path, label: 'Blast', accuracy: 1.0),
-    ));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => AnalisisPage(
+          imagePath: _pickedImage!.path,
+          label: 'Blast',
+          accuracy: 1.0,
+        ),
+      ),
+    );
   }
 
   Widget _buildTopBar() {
