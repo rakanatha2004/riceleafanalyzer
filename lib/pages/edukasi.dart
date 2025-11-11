@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math' as math;
 import 'eduview.dart';
 
 class EdukasiPage extends StatefulWidget {
@@ -124,13 +125,13 @@ class _InfoCard extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _InfoCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     required this.scientific,
     required this.image,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -239,7 +240,11 @@ class _InfoCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.arrow_forward, color: Colors.white),
+                      // rotate the arrow about ~70 degrees to make it slanted
+                      child: Transform.rotate(
+                        angle: -45 * math.pi / 180,
+                        child: const Icon(Icons.arrow_forward, color: Colors.white),
+                      ),
                   ),
                 ),
               ],

@@ -175,9 +175,19 @@ class _SpoilerPageState extends State<SpoilerPage> {
                             color: accent,
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white,
+                          // use custom arrow asset; fallback to Icon if asset fails
+                          child: Center(
+                            child: Image.asset(
+                              'assets/icon/Next.png',
+                              width: 40,
+                              height: 40,
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                  ),
+                            ),
                           ),
                         ),
                       ),
