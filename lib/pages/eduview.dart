@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class EduViewPage extends StatefulWidget {
   final int initialPage;
 
-  const EduViewPage({Key? key, this.initialPage = 0}) : super(key: key);
+  const EduViewPage({super.key, this.initialPage = 0});
 
   @override
   State<EduViewPage> createState() => _EduViewPageState();

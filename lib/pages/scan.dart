@@ -257,13 +257,27 @@ class _ScanPageState extends State<ScanPage> {
                     GestureDetector(
                       onTap: _pickFromGallery,
                       child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.9),
-                          shape: BoxShape.circle,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            // color: Colors.white.withOpacity(0.9),
+                            // shape: BoxShape.circle,
+                          ),
+                          // use a local asset image as the icon so it can be provided manually
+                          child: Image.asset(
+                            'assets/icon/file.png',
+                            width: 50,
+                            height: 50,
+                            // avoid forcing a tint that could hide a colored icon; use blend mode if needed
+                            // color: Colors.teal,
+                            fit: BoxFit.contain,
+                            // if the asset fails to load at runtime, show the default Icon as a fallback
+                            errorBuilder: (context, error, stackTrace) => const Icon(
+                              Icons.photo,
+                              color: Colors.teal,
+                              size: 24,
+                            ),
+                          ),
                         ),
-                        child: const Icon(Icons.photo, color: Colors.teal),
-                      ),
                     )
                   else
                     Row(

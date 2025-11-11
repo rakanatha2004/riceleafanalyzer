@@ -135,10 +135,16 @@ class BottomNavBar extends StatelessWidget {
             children: [
               // icon from asset
               // if this asset is the scan icon, make it larger than other icons
+              // if this is the informasi icon, make it slightly larger to match others
               Builder(
                 builder: (ctx) {
                   final isScan = asset.toLowerCase().contains('scan');
-                  final currentIconSize = isScan ? iconSize * 1.6 : iconSize;
+                  final isInformasi = asset.toLowerCase().contains('profil');
+                  final currentIconSize = isScan 
+                    ? iconSize * 1.3 
+                    : isInformasi 
+                      ? iconSize * 1.3 
+                      : iconSize;
                   return SizedBox(
                     width: currentIconSize,
                     height: currentIconSize,

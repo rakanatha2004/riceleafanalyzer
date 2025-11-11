@@ -45,7 +45,7 @@ class Spoiler2Page extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                'Dengan RiceLeafAnalyzer, analisis cepat dan akurat!',
+                'Dengan SRIKANDI, analisis cepat dan akurat!',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
                   fontSize: 13,

@@ -94,6 +94,7 @@ flutter:
     - assets/images/brownspot.png
     - assets/images/leafsmut.png
     - assets/icon/hasil-analisis.png
+    - assets/icon/file.png
   
   # To add assets to your application, add an assets section, like this:
   # assets:
