@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'analisis.dart';
+import '../utils/responsive.dart';
 
 /// ScanPage
 /// - shows live camera preview (if available)
@@ -126,7 +127,7 @@ class _ScanPageState extends State<ScanPage> {
   Widget _buildTopBar() {
     // Top bar: place back (left), title (center), flash (right) anchored in safe area.
     // Use equal-sized left/right containers so the title stays visually centered.
-    const double controlSize = 44.0;
+    final double controlSize = scaleWidth(context, 44.0);
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
@@ -263,27 +264,28 @@ class _ScanPageState extends State<ScanPage> {
                     GestureDetector(
                       onTap: _pickFromGallery,
                       child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            // color: Colors.white.withOpacity(0.9),
-                            // shape: BoxShape.circle,
-                          ),
-                          // use a local asset image as the icon so it can be provided manually
-                          child: Image.asset(
-                            'assets/icon/file.png',
-                            width: 50,
-                            height: 50,
-                            // avoid forcing a tint that could hide a colored icon; use blend mode if needed
-                            // color: Colors.teal,
-                            fit: BoxFit.contain,
-                            // if the asset fails to load at runtime, show the default Icon as a fallback
-                            errorBuilder: (context, error, stackTrace) => const Icon(
-                              Icons.photo,
-                              color: Colors.teal,
-                              size: 24,
-                            ),
-                          ),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          // color: Colors.white.withOpacity(0.9),
+                          // shape: BoxShape.circle,
                         ),
+                        // use a local asset image as the icon so it can be provided manually
+                        child: Image.asset(
+                          'assets/icon/file.png',
+                          width: scaleWidth(context, 50),
+                          height: scaleWidth(context, 50),
+                          // avoid forcing a tint that could hide a colored icon; use blend mode if needed
+                          // color: Colors.teal,
+                          fit: BoxFit.contain,
+                          // if the asset fails to load at runtime, show the default Icon as a fallback
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(
+                                Icons.photo,
+                                color: Colors.teal,
+                                size: 24,
+                              ),
+                        ),
+                      ),
                     )
                   else
                     Row(
@@ -292,8 +294,8 @@ class _ScanPageState extends State<ScanPage> {
                           borderRadius: BorderRadius.circular(8),
                           child: Image.file(
                             _pickedImage!,
-                            width: 72,
-                            height: 72,
+                            width: scaleWidth(context, 72),
+                            height: scaleWidth(context, 72),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -338,29 +340,35 @@ class _ScanPageState extends State<ScanPage> {
                       ],
                     ),
 
-                  // capture button (center)
-                  GestureDetector(
-                    onTap: _pickedImage == null ? _capturePhoto : null,
-                    child: Container(
-                      width: 84,
-                      height: 84,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white70, width: 6),
-                        color: Colors.transparent,
-                      ),
-                      child: Center(
-                        child: Container(
-                          width: 52,
-                          height: 52,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
+                  // capture button (center) - only show when no image picked
+                  if (_pickedImage == null)
+                    GestureDetector(
+                      onTap: _capturePhoto,
+                      child: Container(
+                        width: scaleWidth(context, 84),
+                        height: scaleWidth(context, 84),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white70,
+                            width: scaleWidth(context, 6),
+                          ),
+                          color: Colors.transparent,
+                        ),
+                        child: Center(
+                          child: Container(
+                            width: scaleWidth(context, 52),
+                            height: scaleWidth(context, 52),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
+                    )
+                  else
+                    const SizedBox.shrink(),
 
                   // right: detect button (shows label)
                   GestureDetector(

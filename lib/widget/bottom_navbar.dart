@@ -56,18 +56,21 @@ class BottomNavBar extends StatelessWidget {
     final itemLabels = labels ?? _defaultLabels;
     final activeColor = const Color(0xFF00B686);
     final inactiveColor = Colors.grey.shade600;
+    final _scale = MediaQuery.of(context).size.width / 390.0;
+    final effectiveHeight = height * _scale;
 
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       notchMargin: 8,
       elevation: 8,
       child: SizedBox(
-        height: height,
+        height: effectiveHeight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // left two
             _navItem(
+              context,
               index: 0,
               asset: items[0],
               label: itemLabels[0],
@@ -76,6 +79,7 @@ class BottomNavBar extends StatelessWidget {
               inactiveColor: inactiveColor,
             ),
             _navItem(
+              context,
               index: 1,
               asset: items[1],
               label: itemLabels[1],
@@ -89,6 +93,7 @@ class BottomNavBar extends StatelessWidget {
 
             // right two
             _navItem(
+              context,
               index: 3,
               asset: items[3],
               label: itemLabels[3],
@@ -97,6 +102,7 @@ class BottomNavBar extends StatelessWidget {
               inactiveColor: inactiveColor,
             ),
             _navItem(
+              context,
               index: 4,
               asset: items[4],
               label: itemLabels[4],
@@ -110,7 +116,8 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 
-  Widget _navItem({
+  Widget _navItem(
+    BuildContext context, {
     required int index,
     required String asset,
     required String label,
@@ -118,6 +125,7 @@ class BottomNavBar extends StatelessWidget {
     required Color activeColor,
     required Color inactiveColor,
   }) {
+    final _scale = MediaQuery.of(context).size.width / 390.0;
     // helper to create the '-aktif' variant path
     String aktifVariant(String path) {
       final dot = path.lastIndexOf('.');
@@ -140,11 +148,10 @@ class BottomNavBar extends StatelessWidget {
                 builder: (ctx) {
                   final isScan = asset.toLowerCase().contains('scan');
                   final isInformasi = asset.toLowerCase().contains('profil');
-                  final currentIconSize = isScan 
-                    ? iconSize * 1.3 
-                    : isInformasi 
-                      ? iconSize * 1.3 
+                  final baseSize = isScan || isInformasi
+                      ? iconSize * 1.3
                       : iconSize;
+                  final currentIconSize = (baseSize * _scale).clamp(18.0, 72.0);
                   return SizedBox(
                     width: currentIconSize,
                     height: currentIconSize,
@@ -186,12 +193,14 @@ class CenterScanButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final activeColor = const Color(0xFF00A991);
+    final _scale = MediaQuery.of(context).size.width / 390.0;
+    final effectiveSize = (size * _scale).clamp(48.0, 120.0);
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: size,
-        height: size,
+        width: effectiveSize,
+        height: effectiveSize,
         decoration: BoxDecoration(
           color: activeColor,
           shape: BoxShape.circle,
@@ -208,8 +217,8 @@ class CenterScanButton extends StatelessWidget {
         child: Center(
           child: SizedBox(
             // make the scan icon noticeably larger inside the circular button
-            width: size * 0.7,
-            height: size * 0.7,
+            width: effectiveSize * 0.7,
+            height: effectiveSize * 0.7,
             child: Image.asset(asset, fit: BoxFit.contain),
           ),
         ),
