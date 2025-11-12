@@ -73,6 +73,9 @@ flutter:
     - assets/brownspot.png
     - assets/leafsmut.png
     - assets/logo.jpeg
+
+    - assets/model/Capstone-NASNetMobile2-V2-SRIKANDI.tflite
+
     - assets/icon/edukasi.png
     - assets/icon/edukasi-aktif.png
     - assets/icon/hasil.png
@@ -88,13 +91,14 @@ flutter:
     - assets/icon/iconedukasi.png
     - assets/icon/iconinformasi.png
     - assets/icon/icondeteksi.png
+    - assets/icon/hasil-analisis.png
+    - assets/icon/file.png
     - assets/icon/deteksiai.png
+
     - assets/images/bakterial.png
     - assets/images/blast.png
     - assets/images/brownspot.png
     - assets/images/leafsmut.png
-    - assets/icon/hasil-analisis.png
-    - assets/icon/file.png
   
   # To add assets to your application, add an assets section, like this:
   # assets:

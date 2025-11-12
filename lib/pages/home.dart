@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../utils/responsive.dart';
 import '../widget/bottom_navbar.dart';
 import 'edukasi.dart';
 import 'scan.dart';
@@ -78,28 +79,28 @@ class _HomePageState extends State<HomePage> {
               children: [
                 if (showBadge)
                   Container(
-                    width: 56,
-                    height: 56,
+                    width: scaleWidth(context, 56),
+                    height: scaleWidth(context, 56),
                     decoration: const BoxDecoration(
                       color: Color(0x1F00A991),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: SizedBox(
-                        width: 28,
-                        height: 28,
+                        width: scaleWidth(context, 28),
+                        height: scaleWidth(context, 28),
                         child: Image.asset(assetPath, fit: BoxFit.contain),
                       ),
                     ),
                   )
                 else
                   SizedBox(
-                    width: 56,
-                    height: 56,
+                    width: scaleWidth(context, 56),
+                    height: scaleWidth(context, 56),
                     child: Center(
                       child: SizedBox(
-                        width: 36,
-                        height: 36,
+                        width: scaleWidth(context, 36),
+                        height: scaleWidth(context, 36),
                         child: Image.asset(assetPath, fit: BoxFit.contain),
                       ),
                     ),
@@ -173,13 +174,13 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(width: 8),
 
                   SizedBox(
-                    width: 86,
-                    height: 86,
+                    width: scaleWidth(context, 86),
+                    height: scaleWidth(context, 86),
                     child: Center(
                       child: Image.asset(
                         'assets/Icon5.png',
-                        width: 144,
-                        height: 176,
+                        width: scaleWidth(context, 144),
+                        height: scaleWidth(context, 176),
                       ),
                     ),
                   ),
