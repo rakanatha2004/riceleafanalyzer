@@ -125,7 +125,7 @@ class _InfoCard extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _InfoCard({
-    super.key,
+    // super.key,
     required this.title,
     required this.description,
     required this.scientific,

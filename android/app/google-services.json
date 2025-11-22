@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "716799064324",
+    "project_id": "srikandi-113lun",
+    "storage_bucket": "srikandi-113lun.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716799064324:android:7e660a4ce133486e377851",
+        "android_client_info": {
+          "package_name": "com.example.riceleafanalyzer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6Wl-mYSlb0bEfgrZUICJzoq5w0vn9LkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

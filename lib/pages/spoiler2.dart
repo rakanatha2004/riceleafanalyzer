@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home.dart';
+import 'package:riceleafanalyzer/pages/login_page.dart';
+// import 'home.dart';
 
 class Spoiler2Page extends StatelessWidget {
   const Spoiler2Page({super.key});
@@ -68,7 +69,7 @@ class Spoiler2Page extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (_) => const HomePage()),
+                      MaterialPageRoute(builder: (_) => const LoginPage()),
                     );
                   },
                   child: Text(

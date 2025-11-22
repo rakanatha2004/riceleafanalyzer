@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'spoiler1.dart';
+import 'home.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -18,13 +20,26 @@ class _SplashPageState extends State<SplashPage> {
       precacheImage(const AssetImage('assets/logo.png'), context);
     });
 
-    Future.delayed(const Duration(seconds: 4), () {
-      if (!mounted) return;
+    Future.delayed(const Duration(seconds: 3), checkLoginStatus);
+  }
+
+  Future<void> checkLoginStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("token");
+
+    if (!mounted) return;
+
+    if (token != null && token.isNotEmpty) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+      );
+    } else {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const SpoilerPage()),
       );
-    });
+    }
   }
 
   @override
@@ -44,11 +59,6 @@ class _SplashPageState extends State<SplashPage> {
                     width: 287,
                     height: 285,
                     fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) => const Icon(
-                      Icons.broken_image,
-                      size: 72,
-                      color: Colors.white,
-                    ),
                   ),
                   const SizedBox(height: 140),
                 ],

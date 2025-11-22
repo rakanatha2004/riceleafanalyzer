@@ -1,23 +1,30 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AnalisisPage extends StatelessWidget {
-  final String? imagePath;
+  final String? imagePath; // path lokal ATAU url network
+  final bool isNetworkImage; // true = network, false = file
   final String label;
-  final double accuracy; // 0.0 - 1.0
+  final double accuracy;
+  final Map<String, dynamic> detail;
 
   const AnalisisPage({
     Key? key,
-    this.imagePath,
-    this.label = 'Blast',
-    this.accuracy = 1.0,
+    required this.imagePath,
+    required this.label,
+    required this.accuracy,
+    required this.detail,
+    this.isNetworkImage = false, // default: bukan network
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final percent = (accuracy * 100).round();
+
+    final ringkasan = detail["ringkasan"] ?? "Tidak ada data.";
+    final pencegahan = detail["pencegahan"] ?? [];
+    final pengobatan = detail["pengobatan"] ?? [];
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7FBFA),
@@ -31,27 +38,29 @@ class AnalisisPage extends StatelessWidget {
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black87),
       ),
+
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // top image
+            // ==== GAMBAR DARI FILE ATAU NETWORK ====
             if (imagePath != null)
               AspectRatio(
                 aspectRatio: 16 / 9,
-                child: Image.file(File(imagePath!), fit: BoxFit.cover),
+                child: isNetworkImage
+                    ? Image.network(
+                        imagePath!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => _placeholder(),
+                      )
+                    : Image.file(File(imagePath!), fit: BoxFit.cover),
               )
             else
-              Container(
-                height: 200,
-                color: Colors.grey.shade200,
-                child: const Center(
-                  child: Icon(Icons.image, size: 48, color: Colors.grey),
-                ),
-              ),
+              SizedBox(height: 200, child: _placeholder()),
 
             const SizedBox(height: 12),
 
+            // ==== LABEL + AKURASI ====
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -65,6 +74,7 @@ class AnalisisPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
+
                   Row(
                     children: [
                       Text(
@@ -84,16 +94,17 @@ class AnalisisPage extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 8),
-                  // progress bar
+
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: LinearProgressIndicator(
                       value: accuracy.clamp(0.0, 1.0),
                       minHeight: 10,
                       backgroundColor: Colors.grey.shade200,
-                      valueColor: AlwaysStoppedAnimation(
-                        const Color(0xFF00A991),
+                      valueColor: const AlwaysStoppedAnimation(
+                        Color(0xFF00A991),
                       ),
                     ),
                   ),
@@ -103,7 +114,7 @@ class AnalisisPage extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            // tabs
+            // ==== TAB ====
             Expanded(
               child: DefaultTabController(
                 length: 3,
@@ -134,45 +145,18 @@ class AnalisisPage extends StatelessWidget {
                         ),
                       ],
                     ),
+
                     Expanded(
                       child: TabBarView(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: SingleChildScrollView(
-                              child: Text(
-                                'Penyakit blast yang disebabkan oleh jamur Magnaporthe oryzae dapat menimbulkan kerusakan serius pada daun padi. Daun yang terinfeksi biasanya menampakkan bercak berbentuk belah ketupat berwarna abu-abu dan bagian tengah dengan tepi berwarna cokelat. Infeksi ini menghambat proses fotosintesis, membuat daun mengering lebih cepat, dan mengurangi kemampuan tanaman untuk tumbuh optimal. Jika penyebaran parah, penyakit blast dapat menjalar ke batang dan malai, menyebabkan bulir padi menjadi hampa dan mengakibatkan penurunan hasil panen secara signifikan.',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 13,
-                                  height: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: SingleChildScrollView(
-                              child: Text(
-                                'Pencegahan:\n• Gunakan varietas tahan penyakit jika tersedia.\n• Lakukan rotasi tanaman dan hindari kelembaban tinggi.\n• Jaga jarak tanam agar sirkulasi udara baik.\n• Aplikasi fungisida sebaiknya mengikuti anjuran penyuluh pertanian.',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 13,
-                                  height: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: SingleChildScrollView(
-                              child: Text(
-                                'Pengobatan:\n• Lakukan aplikasi fungisida sistemik yang direkomendasikan.\n• Ikuti dosis dan interval yang dianjurkan.\n• Potong dan bakar bagian tanaman yang parah untuk mengurangi sumber inokulum.',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 13,
-                                  height: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
+                          // RINGKASAN
+                          _textTab(ringkasan),
+
+                          // PENCEGAHAN
+                          _listTab(pencegahan),
+
+                          // PENGOBATAN
+                          _listTab(pengobatan),
                         ],
                       ),
                     ),
@@ -181,6 +165,46 @@ class AnalisisPage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _placeholder() {
+    return Container(
+      color: Colors.grey.shade300,
+      child: const Center(
+        child: Icon(Icons.broken_image, size: 48, color: Colors.grey),
+      ),
+    );
+  }
+
+  Widget _textTab(String text) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Text(
+          text,
+          style: GoogleFonts.poppins(fontSize: 13, height: 1.5),
+        ),
+      ),
+    );
+  }
+
+  Widget _listTab(List list) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: list
+              .map(
+                (e) => Text(
+                  "• $e",
+                  style: GoogleFonts.poppins(fontSize: 13, height: 1.5),
+                ),
+              )
+              .toList(),
         ),
       ),
     );

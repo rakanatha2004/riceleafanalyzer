@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:riceleafanalyzer/pages/splash.dart';
+import 'package:riceleafanalyzer/services/auth_service.dart';
 import '../utils/responsive.dart';
 import '../widget/bottom_navbar.dart';
 import 'edukasi.dart';
@@ -447,6 +449,23 @@ class _HomePageState extends State<HomePage> {
             ),
 
             const SizedBox(height: 80),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () async {
+                  AuthService.logout();
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => SplashPage()),
+                    (route) => false,
+                  );
+                },
+                child: Text('LOGOUT'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),

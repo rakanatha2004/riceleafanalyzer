@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:riceleafanalyzer/services/auth_service.dart';
 import 'analisis.dart';
 import '../utils/responsive.dart';
 
@@ -107,18 +108,35 @@ class _ScanPageState extends State<ScanPage> {
 
   Future<void> _detectImage() async {
     if (_pickedImage == null) return;
+
     setState(() => _processing = true);
-    // simulate detection delay
-    await Future.delayed(const Duration(seconds: 1));
+
+    final auth = AuthService();
+    final result = await auth.predict(_pickedImage!);
+
     setState(() => _processing = false);
-    // navigate to analysis/detail page with the picked image
+
     if (!mounted) return;
+
+    if (result == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Gagal mendeteksi, coba lagi")),
+      );
+      return;
+    }
+
+    // Ambil data dari API
+    final predictedClass = result["predicted_class"];
+    final confidence = result["confidence"];
+    final detail = result["disease_detail"];
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => AnalisisPage(
           imagePath: _pickedImage!.path,
-          label: 'Blast',
-          accuracy: 1.0,
+          label: predictedClass,
+          accuracy: confidence / 100,
+          detail: detail,
         ),
       ),
     );
