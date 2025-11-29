@@ -40,64 +40,191 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEFF8F7),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Login",
-                  style: GoogleFonts.poppins(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+                // Logo
+                Image.asset(
+                  'assets/logo2.png',
+                  width: 224,
+                  height: 285,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(height: 24),
+
+                // Login Title
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Login',
+                    style: GoogleFonts.poppins(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 18),
 
+                // Username Label
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Username',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                // Username TextField
                 TextField(
                   controller: usernameC,
-                  decoration: const InputDecoration(
-                    labelText: "Username",
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    hintText: 'Username',
+                    hintStyle: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.person,
+                      color: Colors.grey.shade700,
+                      size: 20,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.8),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
+                  ),
+                  style: GoogleFonts.poppins(fontSize: 14),
+                ),
+                const SizedBox(height: 16),
+
+                // Password label & field
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Password',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
-
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 TextField(
                   controller: passwordC,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: "Password",
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    hintStyle: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: Colors.grey.shade700,
+                      size: 20,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.visibility_off,
+                      color: Colors.grey.shade700,
+                      size: 20,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.8),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
                   ),
+                  style: GoogleFonts.poppins(fontSize: 14),
                 ),
+                const SizedBox(height: 28),
 
-                const SizedBox(height: 24),
+                // Login Button
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
+                  height: 52,
                   child: ElevatedButton(
                     onPressed: loading ? null : doLogin,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF4A9B8E),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(26),
+                      ),
+                    ),
                     child: loading
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text("Login"),
+                        : Text(
+                            'Masuk',
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
                   ),
                 ),
+                const SizedBox(height: 24),
 
-                const SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const RegisterPage()),
-                    );
-                  },
-                  child: Text(
-                    "Belum punya akun? Register",
-                    style: GoogleFonts.poppins(color: Colors.blue),
-                  ),
+                // Register Link
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Sudah punya akun? ',
+                      style: GoogleFonts.poppins(
+                        fontSize: 13,
+                        color: Colors.grey.shade700,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const RegisterPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Register',
+                        style: GoogleFonts.poppins(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFF4A9B8E),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -447,25 +447,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
-            const SizedBox(height: 80),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () async {
-                  AuthService.logout();
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => SplashPage()),
-                    (route) => false,
-                  );
-                },
-                child: Text('LOGOUT'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                ),
-              ),
-            ),
           ],
         ),
       ),
