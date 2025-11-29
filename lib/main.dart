@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/splash.dart';
+import 'package:riceleafanalyzer/pages/splash.dart';
+// import 'pages/splash.dart';
 
 void main() {
   runApp(const MyApp());

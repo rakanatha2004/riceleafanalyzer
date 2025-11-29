@@ -14,26 +14,26 @@ class _EdukasiPageState extends State<EdukasiPage> {
   final List<_DiseaseInfo> items = const [
     _DiseaseInfo(
       title: 'Bakterial',
-      description: 'Serangan berat menurunkan hasil panen signifikan.',
       scientific: 'Xanthomonas oryzae',
+      description: 'Serangan berat menurunkan hasil panen signifikan.',
       image: 'assets/images/bakterial.png',
     ),
     _DiseaseInfo(
       title: 'Blast',
-      description: 'Serangan berat menurunkan hasil panen hingga 50%.',
       scientific: 'Magnaporthe oryzae',
+      description: 'Serangan berat menurunkan hasil panen hingga 50%.',
       image: 'assets/images/blast.png',
     ),
     _DiseaseInfo(
       title: 'BrownSpot',
-      description: 'menyebabkan penurunan efisiensi penyerapan nutrisi.',
       scientific: 'Bipolaris oryzae',
+      description: 'menyebabkan penurunan efisiensi penyerapan nutrisi.',
       image: 'assets/images/brownspot.png',
     ),
     _DiseaseInfo(
       title: 'LeafSmut',
-      description: 'Daun terinfeksi mengganggu proses fotosintesis.',
       scientific: 'Entyloma oryzae',
+      description: 'Daun terinfeksi mengganggu proses fotosintesis.',
       image: 'assets/images/leafsmut.png',
     ),
   ];
@@ -105,30 +105,30 @@ class _EdukasiPageState extends State<EdukasiPage> {
 
 class _DiseaseInfo {
   final String title;
-  final String description;
   final String scientific;
+  final String description;
   final String image;
 
   const _DiseaseInfo({
     required this.title,
-    required this.description,
     required this.scientific,
+    required this.description,
     required this.image,
   });
 }
 
 class _InfoCard extends StatelessWidget {
   final String title;
-  final String description;
   final String scientific;
+  final String description;
   final String image;
   final VoidCallback onPressed;
 
   const _InfoCard({
     super.key,
     required this.title,
-    required this.description,
     required this.scientific,
+    required this.description,
     required this.image,
     required this.onPressed,
   });

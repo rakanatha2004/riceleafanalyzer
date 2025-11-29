@@ -147,22 +147,22 @@ class _EduViewPageState extends State<EduViewPage> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  it.description,
-                  style: GoogleFonts.poppins(
-                    fontSize: 13,
-                    color: Colors.grey.shade800,
-                    height: 1.4,
-                  ),
-                ),
-
                 const SizedBox(height: 18),
                 Text(
                   it.scientific,
                   style: GoogleFonts.poppins(
                     fontSize: 12,
                     color: Colors.grey.shade600,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  it.description,
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.poppins(
+                    fontSize: 13,
+                    color: Colors.grey.shade800,
+                    height: 1.4,
                   ),
                 ),
               ],

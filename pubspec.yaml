@@ -73,6 +73,7 @@ flutter:
     - assets/brownspot.png
     - assets/leafsmut.png
     - assets/logo.jpeg
+    - assets/logo2.png
 
     - assets/model/Capstone-NASNetMobile2-V2-SRIKANDI.tflite
 
@@ -99,7 +100,13 @@ flutter:
     - assets/images/blast.png
     - assets/images/brownspot.png
     - assets/images/leafsmut.png
-  
+
+    - assets/tim/dodi.png
+    - assets/tim/putri.png
+    - assets/tim/cindy.png
+    - assets/tim/asep.png
+    - assets/tim/sendi.png
+    - assets/tim/rakan.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
