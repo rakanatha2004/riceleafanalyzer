@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:riceleafanalyzer/pages/splash.dart';
-import 'package:riceleafanalyzer/services/auth_service.dart';
+// import 'package:riceleafanalyzer/pages/splash.dart';
+// import 'package:riceleafanalyzer/services/auth_service.dart';
 import '../utils/responsive.dart';
 import '../widget/bottom_navbar.dart';
 import 'edukasi.dart';
