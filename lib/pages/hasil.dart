@@ -39,8 +39,12 @@ class _HasilPageState extends State<HasilPage> {
         elevation: 0,
         title: Text(
           'Hasil Analisis',
-          style: GoogleFonts.poppins(color: Colors.black87),
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
         ),
+        centerTitle: true,
       ),
 
       // 🟢 WRAP BODY DENGAN RefreshIndicator
@@ -84,11 +88,8 @@ class _HasilCard extends StatelessWidget {
   final PredictHistory item;
   final Color accent;
 
-  const _HasilCard({
-    Key? key,
-    required this.item,
-    required this.accent,
-  }) : super(key: key);
+  const _HasilCard({Key? key, required this.item, required this.accent})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +117,8 @@ class _HasilCard extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Image.asset(
                 'assets/icon/hasil-analisis.png',
-                width: scaleWidth(context, 22),
-                height: scaleWidth(context, 22),
+                width: scaleWidth(context, 27),
+                height: scaleWidth(context, 27),
                 fit: BoxFit.contain,
               ),
             ),

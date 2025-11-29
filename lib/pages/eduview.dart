@@ -147,7 +147,7 @@ class _EduViewPageState extends State<EduViewPage> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: 7),
                 Text(
                   it.scientific,
                   style: GoogleFonts.poppins(

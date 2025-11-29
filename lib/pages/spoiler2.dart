@@ -23,12 +23,12 @@ class Spoiler2Page extends StatelessWidget {
                 child: Center(
                   child: Image.asset(
                     'assets/icon4.png',
-                    width: 260,
-                    height: 260,
+                    width: 350,
+                    height: 350,
                     fit: BoxFit.contain,
                     errorBuilder: (ctx, err, st) => const Icon(
                       Icons.broken_image,
-                      size: 120,
+                      size: 160,
                       color: Colors.grey,
                     ),
                   ),

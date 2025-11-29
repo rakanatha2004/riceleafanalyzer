@@ -55,6 +55,25 @@ class PenggunaanPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    _h('login dan Registrasi'),
+                    const SizedBox(height: 8),
+                    _p(
+                      '1. Jika sudah memiliki akun pengguna dapat langsung login untuk menggunakan aplikasi SRIKANDI.',
+                    ),
+                    const SizedBox(height: 6),
+                    _p(
+                      '2. Jika belum memiliki akun pengguna melakukan register terlebih dahulu, jika register berhasil pengguna dapat langsung login untuk dapat menggunakan aplikasi SRIKANDI.',
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              _section(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     _h('Ambil Foto Langsung'),
                     const SizedBox(height: 8),
                     _p(

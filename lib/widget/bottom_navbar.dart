@@ -60,6 +60,7 @@ class BottomNavBar extends StatelessWidget {
     final effectiveHeight = height * _scale;
 
     return BottomAppBar(
+      color: Colors.white,
       shape: const CircularNotchedRectangle(),
       notchMargin: 8,
       elevation: 8,

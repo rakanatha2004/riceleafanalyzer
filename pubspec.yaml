@@ -99,6 +99,10 @@ flutter:
     - assets/icon/hasil-analisis.png
     - assets/icon/file.png
     - assets/icon/deteksiai.png
+    - assets/icon/icon_info.png
+    - assets/icon/icon_user.png
+    - assets/icon/lock.png
+    - assets/icon/logout.png
 
     - assets/images/bakterial.png
     - assets/images/blast.png

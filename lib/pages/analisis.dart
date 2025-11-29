@@ -185,6 +185,7 @@ class AnalisisPage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Text(
           text,
+          textAlign: TextAlign.justify,
           style: GoogleFonts.poppins(fontSize: 13, height: 1.5),
         ),
       ),

@@ -94,10 +94,26 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 14,
                       color: Colors.grey.shade600,
                     ),
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.grey.shade700,
-                      size: 20,
+                    // constrain the icon container so it doesn't force a large height
+                    prefixIconConstraints: const BoxConstraints(
+                      minWidth: 0,
+                      minHeight: 0,
+                    ),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: Image.asset(
+                          'assets/icon/icon_user.png',
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) => Icon(
+                            Icons.person,
+                            color: Colors.grey.shade700,
+                            size: 16,
+                          ),
+                        ),
+                      ),
                     ),
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.8),
@@ -110,8 +126,8 @@ class _LoginPageState extends State<LoginPage> {
                       borderSide: BorderSide(color: Colors.grey.shade300),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
+                      horizontal: 12,
+                      vertical: 12,
                     ),
                   ),
                   style: GoogleFonts.poppins(fontSize: 14),
@@ -140,15 +156,30 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 14,
                       color: Colors.grey.shade600,
                     ),
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.grey.shade700,
-                      size: 20,
+                    prefixIconConstraints: const BoxConstraints(
+                      minWidth: 0,
+                      minHeight: 0,
+                    ),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: Image.asset(
+                          'assets/icon/lock.png',
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) => Icon(
+                            Icons.lock,
+                            color: Colors.grey.shade700,
+                            size: 16,
+                          ),
+                        ),
+                      ),
                     ),
                     suffixIcon: Icon(
                       Icons.visibility_off,
                       color: Colors.grey.shade700,
-                      size: 20,
+                      size: 18,
                     ),
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.8),
@@ -161,8 +192,8 @@ class _LoginPageState extends State<LoginPage> {
                       borderSide: BorderSide(color: Colors.grey.shade300),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 14,
+                      horizontal: 12,
+                      vertical: 12,
                     ),
                   ),
                   style: GoogleFonts.poppins(fontSize: 14),

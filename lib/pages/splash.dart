@@ -54,11 +54,14 @@ class _SplashPageState extends State<SplashPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(
-                    'assets/logo.png',
-                    width: 287,
-                    height: 285,
-                    fit: BoxFit.contain,
+                  Transform.translate(
+                    offset: const Offset(-12, 0),
+                    child: Image.asset(
+                      'assets/logo.png',
+                      width: 287,
+                      height: 285,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                   const SizedBox(height: 140),
                 ],

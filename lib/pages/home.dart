@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math' as math;
 // import 'package:riceleafanalyzer/pages/splash.dart';
 // import 'package:riceleafanalyzer/services/auth_service.dart';
 import '../utils/responsive.dart';
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     ];
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF2F4F6),
       body: pages[_currentIndex],
       floatingActionButton: CenterScanButton(
         onTap: () => Navigator.of(
@@ -141,53 +143,67 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top banner
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: teal,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Deteksi Penyakit Daun Padi Lebih Cepat!',
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Gunakan AI untuk mendeteksi penyakit sejak dini tingkatkan hasil pertanian.',
-                          style: GoogleFonts.poppins(
-                            color: Colors.white70,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+            // Top banner with overlapping illustration (Icon5) positioned outside the container
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: teal,
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  const SizedBox(width: 8),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Deteksi Penyakit Daun\nPadi Lebih Cepat!',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Gunakan AI untuk mendeteksi\npenyakit sejak dini tingkatkan\nhasil pertanian.',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white70,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // keep some spacing on the right so text doesn't touch the rounded corner
+                      SizedBox(width: scaleWidth(context, 40)),
+                    ],
+                  ),
+                ),
 
-                  SizedBox(
-                    width: scaleWidth(context, 86),
-                    height: scaleWidth(context, 86),
-                    child: Center(
+                // Positioned illustration that overlaps outside the container to the right
+                Positioned(
+                  // move a bit further to the right (more negative -> further outside)
+                  right: -15,
+                  top: -16,
+                  bottom: -20,
+                  child: SizedBox(
+                    width: scaleWidth(context, 144.26),
+                    height: scaleWidth(context, 200),
+                    child: Transform.rotate(
+                      angle: -7.36 * math.pi / 180, // rotate clockwise 7.36°
                       child: Image.asset(
                         'assets/Icon5.png',
-                        width: scaleWidth(context, 144),
-                        height: scaleWidth(context, 176),
+                        fit: BoxFit.contain,
+                        errorBuilder: (ctx, err, st) => const SizedBox.shrink(),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
 
             const SizedBox(height: 18),
@@ -253,7 +269,7 @@ class _HomePageState extends State<HomePage> {
 
             // Tentang
             Text(
-              'Tentang RiceLeafAnalyzer',
+              'Tentang SRIKANDI',
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -261,7 +277,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 6),
             Text(
-              'RiceLeafAnalyzer aplikasi diagnosa daun padi',
+              'SRIKANDI aplikasi diagnosa daun padi',
               style: GoogleFonts.poppins(fontSize: 12),
             ),
 
@@ -406,7 +422,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Saran Pencegahan & Penanganan',
+                          'Saran Pencegahan & Pengobatan',
                           style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

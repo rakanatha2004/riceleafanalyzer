@@ -103,12 +103,12 @@ class _SpoilerPageState extends State<SpoilerPage> {
                               child: Center(
                                 child: Image.asset(
                                   item.image,
-                                  width: 220,
-                                  height: 220,
+                                  width: 350,
+                                  height: 350,
                                   fit: BoxFit.contain,
                                   errorBuilder: (ctx, err, st) => const Icon(
                                     Icons.broken_image,
-                                    size: 120,
+                                    size: 140,
                                     color: Colors.grey,
                                   ),
                                 ),

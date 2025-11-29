@@ -51,10 +51,7 @@ class _EdukasiPageState extends State<EdukasiPage> {
             Center(
               child: Text(
                 'Penyakit Daun Padi',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+                style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: Colors.black87, fontSize: 19),
               ),
             ),
             const SizedBox(height: 12),
