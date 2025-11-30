@@ -18,10 +18,26 @@ class _LoginPageState extends State<LoginPage> {
 
   final auth = AuthService();
 
+  final _formKey = GlobalKey<FormState>();
+  final FocusNode _usernameFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+  bool _obscurePassword = true;
+
   void doLogin() async {
+    // validate form first
+    if (!(_formKey.currentState?.validate() ?? false)) {
+      // focus first empty field
+      if (usernameC.text.trim().isEmpty) {
+        FocusScope.of(context).requestFocus(_usernameFocus);
+      } else if (passwordC.text.trim().isEmpty) {
+        FocusScope.of(context).requestFocus(_passwordFocus);
+      }
+      return;
+    }
+
     setState(() => loading = true);
 
-    bool success = await auth.login(usernameC.text, passwordC.text);
+    bool success = await auth.login(usernameC.text.trim(), passwordC.text);
 
     setState(() => loading = false);
 
@@ -35,6 +51,15 @@ class _LoginPageState extends State<LoginPage> {
         context,
       ).showSnackBar(const SnackBar(content: Text("Login gagal!")));
     }
+  }
+
+  @override
+  void dispose() {
+    usernameC.dispose();
+    passwordC.dispose();
+    _usernameFocus.dispose();
+    _passwordFocus.dispose();
+    super.dispose();
   }
 
   @override
@@ -84,53 +109,71 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-
-                // Username TextField
-                TextField(
-                  controller: usernameC,
-                  decoration: InputDecoration(
-                    hintText: 'Username',
-                    hintStyle: GoogleFonts.poppins(
-                      fontSize: 14,
-                      color: Colors.grey.shade600,
-                    ),
-                    // constrain the icon container so it doesn't force a large height
-                    prefixIconConstraints: const BoxConstraints(
-                      minWidth: 0,
-                      minHeight: 0,
-                    ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: SizedBox(
-                        width: 18,
-                        height: 18,
-                        child: Image.asset(
-                          'assets/icon/icon_user.png',
-                          fit: BoxFit.contain,
-                          errorBuilder: (context, error, stackTrace) => Icon(
-                            Icons.person,
-                            color: Colors.grey.shade700,
-                            size: 16,
+                // Username TextFormField with validation
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        focusNode: _usernameFocus,
+                        controller: usernameC,
+                        validator: (v) {
+                          if (v == null || v.trim().isEmpty) {
+                            return 'Username tidak boleh kosong';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Username',
+                          hintStyle: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: Colors.grey.shade600,
+                          ),
+                          // constrain the icon container so it doesn't force a large height
+                          prefixIconConstraints: const BoxConstraints(
+                            minWidth: 0,
+                            minHeight: 0,
+                          ),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: Image.asset(
+                                'assets/icon/icon_user.png',
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Icon(
+                                      Icons.person,
+                                      color: Colors.grey.shade700,
+                                      size: 16,
+                                    ),
+                              ),
+                            ),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white.withOpacity(0.8),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Colors.grey.shade300),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Colors.grey.shade300),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 12,
                           ),
                         ),
+                        style: GoogleFonts.poppins(fontSize: 14),
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) =>
+                            FocusScope.of(context).requestFocus(_passwordFocus),
                       ),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.8),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.grey.shade300),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Colors.grey.shade300),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 12,
-                    ),
+                    ],
                   ),
-                  style: GoogleFonts.poppins(fontSize: 14),
                 ),
                 const SizedBox(height: 16),
 
@@ -147,9 +190,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                TextField(
+                TextFormField(
+                  focusNode: _passwordFocus,
                   controller: passwordC,
-                  obscureText: true,
+                  obscureText: _obscurePassword,
+                  validator: (v) {
+                    if (v == null || v.isEmpty) {
+                      return 'Password tidak boleh kosong';
+                    }
+                    return null;
+                  },
                   decoration: InputDecoration(
                     hintText: 'Password',
                     hintStyle: GoogleFonts.poppins(
@@ -176,10 +226,16 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    suffixIcon: Icon(
-                      Icons.visibility_off,
-                      color: Colors.grey.shade700,
-                      size: 18,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: Colors.grey.shade700,
+                        size: 18,
+                      ),
+                      onPressed: () =>
+                          setState(() => _obscurePassword = !_obscurePassword),
                     ),
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.8),
@@ -197,6 +253,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   style: GoogleFonts.poppins(fontSize: 14),
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (_) => doLogin(),
                 ),
                 const SizedBox(height: 28),
 
@@ -231,7 +289,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Sudah punya akun? ',
+                      'Tidak punya akun? ',
                       style: GoogleFonts.poppins(
                         fontSize: 13,
                         color: Colors.grey.shade700,
